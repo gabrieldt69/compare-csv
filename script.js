@@ -1,5 +1,5 @@
-let btn_upload = document.getElementById('btn-upload-csv').addEventListener('click', () => {
-    Papa.parse(document.getElementById('upload-csv').files[0], {
+/*let btn_upload = document.getElementById('btn-compare-csv').addEventListener('click', () => {
+    Papa.parse(document.getElementById('upload-csv1','upload-csv2').files[0], {
             download: true,
             header: false,
             complete: function (results) {
@@ -20,4 +20,27 @@ function generateTableHead(table, data) {
         th.appendChild(text);
         row.appendChild(th);
     }
-}
+}*/
+
+var file1 = document.getElementById('btn-compare-csv').addEventListener('click', () => {
+    Papa.parse(document.getElementById('upload-csv1').files[0], {
+        download: true,
+        header: false,
+        complete: function (results, file) {
+            console.log("Parsing complete:", results, file);
+        }
+    });
+});
+
+var file2 = document.getElementById('btn-compare-csv').addEventListener('click', () => {
+    Papa.parse(document.getElementById('upload-csv2').files[0], {
+        download: true,
+        header: false,
+        complete: function (results, file) {
+            console.log("Parsing complete:", results, file);
+
+        }
+    });
+});
+
+
