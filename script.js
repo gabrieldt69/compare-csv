@@ -1,46 +1,62 @@
-/*let btn_upload = document.getElementById('btn-compare-csv').addEventListener('click', () => {
-    Papa.parse(document.getElementById('upload-csv1','upload-csv2').files[0], {
+var file1;
+var file2;
+
+document.getElementById('upload-csv1').addEventListener('change', () => {
+    try {
+        Papa.parse(document.getElementById('upload-csv1').files[0], {
             download: true,
             header: false,
-            complete: function (results) {
-                results.data.map((data, index) => {
-                    let table = document.getElementById("tbl-data");
-                    generateTableHead(table, data);
-                });
-        }
-    });
-});
-
-function generateTableHead(table, data) {
-    let thead = table.createTHead();
-    let row = thead.insertRow();
-    for (let key of data) {
-        let th = document.createElement("th");
-        let text = document.createTextNode(key);
-        th.appendChild(text);
-        row.appendChild(th);
+            complete: (e) => {
+                file1 = e;
+            },
+        });
+    } catch (e) {
+        alert('Não foi possivel ler o arquivo');
     }
-}*/
-
-var file1 = document.getElementById('btn-compare-csv').addEventListener('click', () => {
-    Papa.parse(document.getElementById('upload-csv1').files[0], {
-        download: true,
-        header: false,
-        complete: function (results, file) {
-            console.log("Parsing complete:", results, file);
-        }
-    });
 });
 
-var file2 = document.getElementById('btn-compare-csv').addEventListener('click', () => {
-    Papa.parse(document.getElementById('upload-csv2').files[0], {
-        download: true,
-        header: false,
-        complete: function (results, file) {
-            console.log("Parsing complete:", results, file);
-
-        }
-    });
+document.getElementById('upload-csv2').addEventListener('change', () => {
+    try {
+        Papa.parse(document.getElementById('upload-csv2').files[0], {
+            download: true,
+            header: false,
+            complete: (e) => {
+                file2 = e;
+            },
+        });
+    } catch (e) {
+        alert('Não foi possivel ler o arquivo');
+    }
 });
 
+document.getElementById('btn-compare-csv').addEventListener('click', () => {
+    let contador = 0;
+    let contadorVerificações = 0;
+    let contadorPossiveisComparacoes = 0;
 
+    file1.data.map((elementoA) => {
+        console.log(`${elementoA[3]?.toLowerCase()}`);
+
+        file2.data.map((elementoB) => {
+            if (elementoA[3]?.toLowerCase()?.toLowerCase() == elementoB[3]?.toLowerCase()) {
+                console.log(`${elementoA[3]?.toLowerCase()} == ${elementoB[3]?.toLowerCase()}`);
+                contador++;
+            }
+
+            try {
+                if (
+                    `${elementoA[3]?.toLowerCase().split(' ')[0]} ${elementoA[3]?.toLowerCase().split(' ')[1]}` ==
+                    `${elementoB[3]?.toLowerCase().split(' ')[0]} ${elementoB[3]?.toLowerCase().split(' ')[1]}`
+                ) {
+                    contadorPossiveisComparacoes++;
+                }
+            } catch (e) {}
+
+            contadorVerificações++;
+        });
+    });
+
+    alert(
+        `Existem ${contador} nomes do arquivo A no arquivo B\nTotal de Verificações: ${contadorVerificações}\nNOTA: Nomes iniciais similares: ${contadorPossiveisComparacoes}`
+    );
+});
