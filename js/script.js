@@ -32,31 +32,20 @@ document.getElementById('upload-csv2').addEventListener('change', () => {
 document.getElementById('btn-compare-csv').addEventListener('click', () => {
     let contador = 0;
     let contadorVerificações = 0;
-    let contadorPossiveisComparacoes = 0;
 
     file1.data.map((elementoA) => {
-        console.log(`${elementoA[3]?.toLowerCase()}`);
+        console.log(elementoA[1]);
 
         file2.data.map((elementoB) => {
-            if (elementoA[3]?.toLowerCase()?.toLowerCase() == elementoB[3]?.toLowerCase()) {
-                console.log(`${elementoA[3]?.toLowerCase()} == ${elementoB[3]?.toLowerCase()}`);
+            if (elementoA[1] == elementoB[2]) {
+                console.log(elementoA[1] == elementoB[2]);
                 contador++;
             }
-
-            try {
-                if (
-                    `${elementoA[3]?.toLowerCase().split(' ')[0]} ${elementoA[3]?.toLowerCase().split(' ')[1]}` ==
-                    `${elementoB[3]?.toLowerCase().split(' ')[0]} ${elementoB[3]?.toLowerCase().split(' ')[1]}`
-                ) {
-                    contadorPossiveisComparacoes++;
-                }
-            } catch (e) {}
-
             contadorVerificações++;
         });
     });
 
     alert(
-        `Existem ${contador} nomes do arquivo A no arquivo B\nTotal de Verificações: ${contadorVerificações}\nNOTA: Nomes iniciais similares: ${contadorPossiveisComparacoes}`
+        `Existem ${contador} ocorrências do arquivo A no arquivo B\nTotal de Verificações: ${contadorVerificações}\n`
     );
 });
