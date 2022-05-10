@@ -34,18 +34,18 @@ document.getElementById('btn-compare-csv').addEventListener('click', () => {
     let contadorVerificações = 0;
 
     file1.data.map((elementoA) => {
-        console.log(elementoA[1]);
-
+        
         file2.data.map((elementoB) => {
-            if (elementoA[1] == elementoB[2]) {
-                console.log(elementoA[1] == elementoB[2]);
+            if (elementoA[3]?.toLowerCase()?.toLowerCase() == elementoB[3]?.toLowerCase()) {
+                console.log(`${elementoA[3]?.toLowerCase()} == ${elementoB[3]?.toLowerCase()}`);
                 contador++;
             }
+
             contadorVerificações++;
         });
     });
 
     alert(
-        `Existem ${contador} ocorrências do arquivo A no arquivo B\nTotal de Verificações: ${contadorVerificações}\n`
+        `Existem ${contador} nomes do arquivo A no arquivo B\nTotal de Verificações: ${contadorVerificações}\n`
     );
 });
