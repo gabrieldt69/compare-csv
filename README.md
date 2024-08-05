@@ -1,4 +1,4 @@
-# compare-csv
-Aplicação Web para comparação de relatórios entre as plataformas MK Solutions e Digicade Geosite.
+# Compare-csv
+Web application for comparing reports between the MK Solutions and Digicade Geosite platforms.
 
-A aplicação importa arquivos CSV gerados nas plataformas, os lê e compara, de acordo com as duas tabelas indicadas para verificação de faltantes, e requisitos para cadastro.
+The application imports CSV files generated on the platforms, reads and compares them, according to the two tables indicated to check for missing files and registration requirements.
